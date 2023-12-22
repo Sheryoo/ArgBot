@@ -7,7 +7,6 @@ const dotenv = require("dotenv").config();
 // Import routes
 const registerRoute = require("./routes/register");
 const loginRoute = require("./routes/login");
-const notFound = require("./middleware/notFound");
 
 // Connect to the database
 const sequelize = require("./models/database");
@@ -29,7 +28,6 @@ app.use(morgan("common"));
 
 app.use(`${API}`, registerRoute);
 app.use(`${API}`, loginRoute);
-app.use(notFound);
 
 app.listen(3030, () => {
   console.log("The server is running on : http://localhost:3030/api/v1/");
