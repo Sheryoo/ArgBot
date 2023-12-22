@@ -14,7 +14,7 @@ const login = async (req, res) => {
       },
     });
     if (!user) {
-      return res.status(404).json({ message: "User not found", data: null });
+      return res.status(404).json({ status: 'false', message: "User not found", data: null });
     }
     crypto.pbkdf2(
       password,
@@ -28,6 +28,7 @@ const login = async (req, res) => {
         }
         if (!crypto.timingSafeEqual(user.password, hashedPassword)) {
           return res.status(401).json({
+            status: 'false',
             message: "Incorrect Password",
             data: null,
           });
@@ -39,14 +40,15 @@ const login = async (req, res) => {
         });
 
         return res.status(200).json({
+          status: "true",
           message: "Logged in successfully",
-          data: user[("fullName", "email", "city", "phoneNumber")],
+          data: user,
           token: token,
         });
       }
     );
   } catch (error) {
-    return res.status(500).json({ message: error, data: null });
+    return res.status(500).json({ status: 'false', message: error, data: null });
   }
 };
 

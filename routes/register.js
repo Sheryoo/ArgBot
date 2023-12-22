@@ -14,7 +14,7 @@ router.post("/register/", (req, res) => {
     "sha256",
     async (err, hashedPassword) => {
       if (err) {
-        res.status(500).json({ message: err, data: null });
+        res.status(500).json({ status: 'false' ,message: err, data: null });
       }
       try {
         const user = await User.create({
@@ -27,9 +27,9 @@ router.post("/register/", (req, res) => {
         });
         res
           .status(201)
-          .json({ message: "User created successfully", data: user });
+          .json({ status: 'true', message: "User created successfully", data: user});
       } catch (err) {
-        res.status(500).json({ message: err, data: null });
+        res.status(500).json({status: 'false' ,message: err, data: null });
       }
     }
   );
