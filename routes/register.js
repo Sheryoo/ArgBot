@@ -35,7 +35,12 @@ router.post("/register/", (req, res) => {
           city: req.body.city,
           phoneNumber: req.body.phoneNumber,
         });
-        const response = { email:user.email, fullName:user.fullName, phoneNumber:user.phoneNumber, city:user.city }
+        const id = new Date().getDate();
+
+        const token = jwt.sign({ id, email }, process.env.JWT_SECRET, {
+          expiresIn: "30d",
+        });
+        const response = { email:user.email, fullName:user.fullName, phoneNumber:user.phoneNumber, city:user.city, token: token };
         res
           .status(201)
           .json({ status: true, message: "User created successfully", data: response});

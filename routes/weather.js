@@ -4,7 +4,7 @@ const User = require("../models/Users");
 
 const authMiddleware = require("../middleware/auth");
 
-router.post("/get-weather", authMiddleware, async (req, res) => {
+router.get("/get-weather", authMiddleware, async (req, res) => {
   const user = await User.findOne({ where: { email: req.user.email } });
   const city = user.city;
   APIresult = await fetch(
