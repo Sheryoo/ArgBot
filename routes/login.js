@@ -38,11 +38,11 @@ const login = async (req, res) => {
         const token = jwt.sign({ id, email }, process.env.JWT_SECRET, {
           expiresIn: "30d",
         });
-
+        const response = [user.email,user.fullName, user.phoneNumber, user.city]
         return res.status(200).json({
           status: "true",
           message: "Logged in successfully",
-          data: user,
+          data: response,
           token: token,
         });
       }
