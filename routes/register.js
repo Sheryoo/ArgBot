@@ -25,7 +25,7 @@ router.post("/register/", (req, res) => {
           city: req.body.city,
           phoneNumber: req.body.phoneNumber,
         });
-        const response = [user.email,user.fullName, user.phoneNumber, user.city]
+        const response = { email:user.email, fullName:user.fullName, phoneNumber:user.phoneNumber, city:user.city }
         res
           .status(201)
           .json({ status: 'true', message: "User created successfully", data: response});
