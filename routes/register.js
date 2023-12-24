@@ -38,6 +38,7 @@ router.post("/register/", (req, res) => {
         });
         const id = new Date().getDate();
 
+        email = user.email
         const token = jwt.sign({ id, email }, process.env.JWT_SECRET, {
           expiresIn: "30d",
         });
